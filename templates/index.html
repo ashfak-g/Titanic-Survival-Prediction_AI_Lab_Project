@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Titanic Survival Prediction</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-image: url('/static/wallpaper.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+            color: #333;
+        }
+        .container {
+            background-color: rgb(247, 239, 239);
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.4);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        .btn {
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            width: 100%;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #218838;
+        }
+        .result {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Titanic: Prediction of Life & Loss</h2>
+        <form method="POST" action="/predict">
+            <label>Pclass (1, 2, or 3):</label>
+            <select name="Pclass" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3" >3</option>
+            </select>
+
+            <label>Sex:</label>
+            <select name="Sex" required>
+                <option value="1">Female</option>
+                <option value="0" selected>Male</option>
+            </select>
+
+            <label>Age:</label>
+            <input type="number" name="Age" step="0.1" required>
+
+            <label>Siblings/Spouses Aboard (SibSp):</label>
+            <input type="number" name="SibSp" required>
+
+            <label>Parents/Children Aboard (Parch):</label>
+            <input type="number" name="Parch" required>
+
+            <label>Fare:</label>
+            <input type="number" name="Fare" step="0.0001" required>
+
+            <label>Embarked from:</label>
+            <select name="Embarked" required>
+                <option value="S" selected>Southampton</option>
+                <option value="C">Cherbourg</option>
+                <option value="Q">Queenstown</option>
+            </select>
+
+            <button type="submit" class="btn">Predict</button>
+        </form>
+
+        {% if prediction is not none %}
+            <div class="result">
+                Prediction: {{ prediction }}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
